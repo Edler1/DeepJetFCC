@@ -128,7 +128,8 @@ class TrainData_ParT(TrainData):
         self.undefTruth=['isUndefined_Z']
         self.weightbranchX='jets_pt'
         self.weightbranchY='jets_eta'
-        self.remove = True
+        self.remove = False
+        ###self.remove = True
         ##self.referenceclass= 'isB'  #'flatten'  #Choose 'flatten' for flat or one of the truth branch for ref
         self.referenceclass= 'isB_Z'  #'flatten'  #Choose 'flatten' for flat or one of the truth branch for ref
         #self.red_classes = ['cat_B','cat_C','cat_UDS','cat_G'] #reduced classes (flat only)
@@ -161,7 +162,7 @@ class TrainData_ParT(TrainData):
         )
 
         self.global_branches = ['jets_pt', 'jets_eta',
-                                'jets_phi', 'jets_e',
+                               'jets_phi', 'jets_e',
                                 #'nCpfcand','nNpfcand',
                                 'jets_theta',
                                 'jets_p','jets_m',
@@ -183,7 +184,11 @@ class TrainData_ParT(TrainData):
                              #'RPj_charged_pRel',
                              'RPj_charged_isMuon',
                              'RPj_charged_is_Kaon_smearedUniform090',
-                             ###'RPj_charged_is_Kaon',
+                             #'RPj_charged_is_Kaon_smearedUniform080',
+                             #'RPj_charged_is_Kaon_smearedUniform040',
+                             #'RPj_charged_is_Kaon_smearedUniform060',
+                             #'RPj_charged_is_Kaon_smearedUniform090',
+                             #'RPj_charged_is_Kaon',
                              ]
         self.n_cpf = 25
 

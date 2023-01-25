@@ -111,6 +111,11 @@ int main(int argc, char** argv){
    std::vector<std::vector<float>> *RPj_charged_is_Kaon_smearedUniform080 = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_is_Kaon_smearedUniform090 = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_is_Kaon_smearedUniform095 = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_is_Kaon_smearedUniform060 = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_is_Kaon_smearedUniform040 = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_is_Kaon_smearedUniform020 = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_is_Kaon_smearedUniform000 = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_is_Kaon_smearedUniform100 = new std::vector<std::vector<float>>;
    
    //Neutral-constituent variables
    std::vector<std::vector<float>> *RPj_neutral_p = new std::vector<std::vector<float>>;
@@ -205,6 +210,11 @@ int main(int argc, char** argv){
    t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform080",&RPj_charged_is_Kaon_smearedUniform080);
    t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform090",&RPj_charged_is_Kaon_smearedUniform090);
    t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform095",&RPj_charged_is_Kaon_smearedUniform095);
+   t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform060",&RPj_charged_is_Kaon_smearedUniform060);
+   t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform040",&RPj_charged_is_Kaon_smearedUniform040);
+   t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform020",&RPj_charged_is_Kaon_smearedUniform020);
+   t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform000",&RPj_charged_is_Kaon_smearedUniform000);
+   t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform100",&RPj_charged_is_Kaon_smearedUniform100);
    
    
    t1->SetBranchAddress("RPj_neutral_p",&RPj_neutral_p);
@@ -329,6 +339,11 @@ int main(int argc, char** argv){
    Float_t RPj_charged_is_Kaon_smearedUniform080_[100];
    Float_t RPj_charged_is_Kaon_smearedUniform090_[100];
    Float_t RPj_charged_is_Kaon_smearedUniform095_[100];
+   Float_t RPj_charged_is_Kaon_smearedUniform060_[100];
+   Float_t RPj_charged_is_Kaon_smearedUniform040_[100];
+   Float_t RPj_charged_is_Kaon_smearedUniform020_[100];
+   Float_t RPj_charged_is_Kaon_smearedUniform000_[100];
+   Float_t RPj_charged_is_Kaon_smearedUniform100_[100];
 
    Float_t RPj_neutral_p_[100];
    Float_t RPj_neutral_pRel_[100];
@@ -425,6 +440,11 @@ int main(int argc, char** argv){
    newtree->Branch("RPj_charged_is_Kaon_smearedUniform080", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform080[nCRP]/F");
    newtree->Branch("RPj_charged_is_Kaon_smearedUniform090", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform090[nCRP]/F");
    newtree->Branch("RPj_charged_is_Kaon_smearedUniform095", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform095[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform060", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform060[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform040", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform040[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform020", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform020[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform000", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform000[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform100", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform100[nCRP]/F");
 
    newtree->Branch("RPj_neutral_p", &RPj_neutral_p_, "RPj_neutral_p[nNRP]/F");
    newtree->Branch("RPj_neutral_pRel", &RPj_neutral_pRel_, "RPj_neutral_pRel[nNRP]/F");
@@ -528,6 +548,11 @@ int main(int argc, char** argv){
        std::copy((*RPj_charged_is_Kaon_smearedUniform080)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform080)[j].end(), RPj_charged_is_Kaon_smearedUniform080_);
        std::copy((*RPj_charged_is_Kaon_smearedUniform090)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform090)[j].end(), RPj_charged_is_Kaon_smearedUniform090_);
        std::copy((*RPj_charged_is_Kaon_smearedUniform095)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform095)[j].end(), RPj_charged_is_Kaon_smearedUniform095_);
+       std::copy((*RPj_charged_is_Kaon_smearedUniform060)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform060)[j].end(), RPj_charged_is_Kaon_smearedUniform060_);
+       std::copy((*RPj_charged_is_Kaon_smearedUniform040)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform040)[j].end(), RPj_charged_is_Kaon_smearedUniform040_);
+       std::copy((*RPj_charged_is_Kaon_smearedUniform020)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform020)[j].end(), RPj_charged_is_Kaon_smearedUniform020_);
+       std::copy((*RPj_charged_is_Kaon_smearedUniform000)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform000)[j].end(), RPj_charged_is_Kaon_smearedUniform000_);
+       std::copy((*RPj_charged_is_Kaon_smearedUniform100)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform100)[j].end(), RPj_charged_is_Kaon_smearedUniform100_);
 
        std::copy((*RPj_neutral_p)[j].begin(), (*RPj_neutral_p)[j].end(), RPj_neutral_p_);//&((*RPj_neutral_p)[j])[j]
        std::copy((*RPj_neutral_pRel)[j].begin(), (*RPj_neutral_pRel)[j].end(), RPj_neutral_pRel_);
@@ -625,6 +650,11 @@ int main(int argc, char** argv){
    delete RPj_charged_is_Kaon_smearedUniform080;
    delete RPj_charged_is_Kaon_smearedUniform090;
    delete RPj_charged_is_Kaon_smearedUniform095;
+   delete RPj_charged_is_Kaon_smearedUniform060;
+   delete RPj_charged_is_Kaon_smearedUniform040;
+   delete RPj_charged_is_Kaon_smearedUniform020;
+   delete RPj_charged_is_Kaon_smearedUniform000;
+   delete RPj_charged_is_Kaon_smearedUniform100;
 
    delete RPj_neutral_p;
    delete RPj_neutral_pRel;
