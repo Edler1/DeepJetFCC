@@ -1,3 +1,4 @@
+
 from DeepJetCore.TrainData import TrainData, fileTimeOut
 import numpy as np
 import uproot3 as u3
@@ -7,7 +8,11 @@ import pandas as pd
 
 import os
 
-print("Running the updated version... This is 1805_shortFiles...")
+
+
+
+
+print("Running the updated version...")
 
 
 GLOBAL_PREFIX = ""
@@ -113,8 +118,7 @@ def map_prefix(elements):
 
 class TrainData_ParT(TrainData):
     def __init__(self):
-      
-        print("The code is actually run...")
+        
 
         TrainData.__init__(self)        
         
@@ -183,12 +187,8 @@ class TrainData_ParT(TrainData):
                              #'RPj_charged_dPhi',
                              #'RPj_charged_pRel',
                              'RPj_charged_isMuon',
+                             #'RPj_charged_is_S',
                              'RPj_charged_is_Kaon_smearedUniform090',
-                             #'RPj_charged_is_Kaon_smearedUniform080',
-                             #'RPj_charged_is_Kaon_smearedUniform040',
-                             #'RPj_charged_is_Kaon_smearedUniform060',
-                             #'RPj_charged_is_Kaon_smearedUniform090',
-                             #'RPj_charged_is_Kaon',
                              ]
         self.n_cpf = 25
 
@@ -434,6 +434,17 @@ class TrainData_ParT(TrainData):
         #cpf_pts = np.where(np.isfinite(cpf_pts), cpf_pts, 0)
         #npf_pts = np.where(np.isfinite(npf_pts), npf_pts, 0)
         #vtx_pts = np.where(np.isfinite(vtx_pts), vtx_pts, 0)
+        
+        #if istraining:
+        #    print('shuffling')
+        #    index = np.arange(len(x_global))
+        #    np.random.shuffle(index)
+        #    x_global = x_global[index]
+        #    x_cpf = x_cpf[index]
+        #    x_npf = x_npf[index]
+        #    x_vtx = x_vtx[index]
+        #    x_v0 = x_v0[index]
+        #    x_spectator = x_spectator[index]
         
         #return [x_global, x_cpf, x_npf, x_vtx, cpf_pts, npf_pts, vtx_pts], [truth], []
         return [x_global, x_cpf, x_npf, x_vtx, x_v0, x_spectator], [truth], []

@@ -28,6 +28,7 @@ import torch.nn.functional as F
 from pytorch_deepjet import DeepJet
 from pytorch_deepjet_transformer import DeepJetTransformer
 from pytorch_deepjet_transformer_V0 import DeepJetTransformerV0
+from pytorch_deepjet_transformer_V0_Higgs import DeepJetTransformerV0 as DeepJetTransformerV0_Higgs
 from torch.optim import Adam, SGD
 from tqdm import tqdm
 
@@ -37,7 +38,7 @@ import uproot
 
 inputdatafiles=[]
 inputdir=None
-
+## something
 def test_loop(dataloader, model, nbatches, pbar):
  
     predictions = 0
@@ -103,6 +104,8 @@ if args.model == 'DeepJetTransformer':
     model = DeepJetTransformer(num_classes = 5)
 if args.model == 'DeepJetTransformerV0':
     model = DeepJetTransformerV0(num_classes = 5)
+if args.model == 'DeepJetTransformerV0_Higgs':
+    model = DeepJetTransformerV0_Higgs(num_classes = 6)
     
 check = torch.load(args.inputModel, map_location=torch.device('cpu'))
 model.load_state_dict(check['state_dict'])

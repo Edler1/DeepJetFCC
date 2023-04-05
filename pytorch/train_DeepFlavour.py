@@ -67,5 +67,6 @@ train=training_base(model = model, criterion = criterion, optimizer = optimizer,
 
 train.train_data.maxFilesOpen=1
 
-model,history = train.trainModel(nepochs=num_epochs+lr_epochs, batchsize=4000)
+model = train.trainModel(nepochs=num_epochs+lr_epochs, batchsize=4000)
+#model,history = train.trainModel(nepochs=num_epochs+lr_epochs, batchsize=4000)
 #model,history = train.trainModel(nepochs=num_epochs+lr_epochs, batchsize=512)
