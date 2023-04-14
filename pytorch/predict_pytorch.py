@@ -17,6 +17,10 @@ args = parser.parse_args()
 batchsize = int(args.b)
 all_vars = args.all_vars
 
+if(all_vars):
+    raise Exception("The \"all_vars\" option is not supported yet!")
+
+
 import imp
 import numpy as np
 from DeepJetCore.DataCollection import DataCollection
@@ -33,6 +37,8 @@ from pytorch_deepjet_transformer_V0 import DeepJetTransformerV0
 from pytorch_deepjet_transformer_V0_Higgs import DeepJetTransformerV0 as DeepJetTransformerV0_Higgs
 from torch.optim import Adam, SGD
 from tqdm import tqdm
+import re
+import subprocess
 
 import DeepJetCore
 
@@ -76,10 +82,11 @@ def test_loop(dataloader, model, nbatches, pbar):
             desc = 'Predicting probs : '
             pbar.set_description(desc)
             pbar.update(1)
-    if (not all_vars):       
-        return predictions, y_vars, global_vars, spectator_vars
-    else:
-        return predictions, y_vars, global_vars, spectator_vars
+    #if (not all_vars):       
+    #    return predictions, y_vars, global_vars, spectator_vars
+    #else:
+    #    return predictions, y_vars, global_vars, spectator_vars
+    return predictions, y_vars, global_vars, spectator_vars
 
 ## prepare input lists for different file formats
 if args.inputSourceFileList[-6:] == ".djcdc":
@@ -104,13 +111,15 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 if args.model == 'DeepJet':
     model = DeepJet(num_classes = 5)
-if args.model == 'DeepJetTransformer':
+elif args.model == 'DeepJetTransformer':
     model = DeepJetTransformer(num_classes = 5)
-if args.model == 'DeepJetTransformerV0':
+elif args.model == 'DeepJetTransformerV0':
     model = DeepJetTransformerV0(num_classes = 5)
-if args.model == 'DeepJetTransformerV0_Higgs':
+elif args.model == 'DeepJetTransformerV0_Higgs':
     model = DeepJetTransformerV0_Higgs(num_classes = 6)
-    
+else:
+    raise Exception("Model name incorrect!")
+
 check = torch.load(args.inputModel, map_location=torch.device('cpu'))
 model.load_state_dict(check['state_dict'])
 
@@ -186,8 +195,30 @@ for inputfile in inputdatafiles:
     #fields=["predicted", "truths", "event_index", "jets_px", "jets_py", "jets_pz", "jets_e", "jets_m",]
     ##fields=["event_index", "jets_px", "jets_py", "jets_pz", "jets_e", "jets_m", "predicted", "truth",]
     # This is hardcoded, but I could technically just read it off of the TrainData datastructure... Think about what vars we need...
-    fields=["event_index", "jets_px", "jets_py", "predicted", "truths",]
     
+    #baseDir = "/afs/cern.ch/user/e/eploerer/private/DeepJetFCC/DeepJetFCC/modules/datastructures/"
+    baseDir = "/user/eploerer/DeepJetFCC/DeepJetFCC/modules/datastructures/"
+    scriptname = [f for f in os.listdir(baseDir) if re.search("\A[a-zA-Z].*\.py", f)]
+    print("Scriptname = "+str(scriptname))
+    if len(scriptname)==1:
+        scriptname = scriptname[0]
+    else:
+        raise Exception("Please revise definition of datastructres!")
+   
+    filename = baseDir+scriptname
+    pattern = "self.spectator_branches = \[*"
+    
+    # Call the grep command and store the output
+    grep_output = subprocess.check_output(["grep", pattern, filename])
+    
+    # Decode the output from bytes to string
+    grep_output = grep_output.decode()
+    
+
+    fields = grep_output.split('\'')[1::2]
+    print("spectator_branches = {}".format(fields))
+
+
 
     for spec_index, field in enumerate(fields):
         if(field=="predicted"): 
