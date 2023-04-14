@@ -11,9 +11,11 @@ parser.add_argument("-b", help="batch size, overrides the batch size from the tr
 parser.add_argument("--gpu",  help="select specific GPU", metavar="OPT", default="")
 parser.add_argument("--unbuffered", help="do not read input in memory buffered mode (for lower memory consumption on fast disks)", default=False, action="store_true")
 parser.add_argument("--pad_rowsplits", help="pad the row splits if the input is ragged", default=False, action="store_true")
+parser.add_argument("-all_vars", help="flag to return all variables associated with a jet. Bloats file size, only recommended for analysis.",default=False)
 
 args = parser.parse_args()
 batchsize = int(args.b)
+all_vars = args.all_vars
 
 import imp
 import numpy as np
@@ -74,8 +76,10 @@ def test_loop(dataloader, model, nbatches, pbar):
             desc = 'Predicting probs : '
             pbar.set_description(desc)
             pbar.update(1)
-        
-    return predictions, y_vars, global_vars, spectator_vars
+    if (not all_vars):       
+        return predictions, y_vars, global_vars, spectator_vars
+    else:
+        return predictions, y_vars, global_vars, spectator_vars
 
 ## prepare input lists for different file formats
 if args.inputSourceFileList[-6:] == ".djcdc":
@@ -181,6 +185,7 @@ for inputfile in inputdatafiles:
     pred_tree={}
     #fields=["predicted", "truths", "event_index", "jets_px", "jets_py", "jets_pz", "jets_e", "jets_m",]
     ##fields=["event_index", "jets_px", "jets_py", "jets_pz", "jets_e", "jets_m", "predicted", "truth",]
+    # This is hardcoded, but I could technically just read it off of the TrainData datastructure...
     fields=["event_index", "jets_px", "jets_py", "predicted", "truths",]
     
 
