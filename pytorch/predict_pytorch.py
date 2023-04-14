@@ -217,7 +217,7 @@ for inputfile in inputdatafiles:
 
     fields = grep_output.split('\'')[1::2]
     print("spectator_branches = {}".format(fields))
-
+    fields = ["predicted", "truths"] + fields
 
 
     for spec_index, field in enumerate(fields):
@@ -227,7 +227,7 @@ for inputfile in inputdatafiles:
         if(field=="truths"): 
             pred_tree[field]=predicted[1]
             continue
-        # for now this is globs, beware!
+        # for now this is spectators, beware!
         pred_tree[field]=predicted[3][:,spec_index]
  
     root_file = uproot.recreate("{0}/raw_predictions_{1}.root".format((args.inputModel).split("/")[-2], inputfile[6:-5]))
