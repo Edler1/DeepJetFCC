@@ -204,7 +204,7 @@ class TrainData_ParT(TrainData):
         self.n_v0 = 4
         
         # These are the spectator variables relevant during inference. They have the same struct as glob vars.
-        self.spectator_branches = ['event_index', 'jets_px', 'jets_py',
+        self.spectator_branches = ['event_index', 'jet_index', 'jets_e', 'jets_px', 'jets_py', 'jets_pz', 'jets_m', 'jets_theta', 'jets_phi'
         ]
         
         #self.reduced_truth = ['isB','isBB','isGBB','isLeptonicB','isLeptonicB_C','isC','isGCC','isCC','isUD','isS','isG']
