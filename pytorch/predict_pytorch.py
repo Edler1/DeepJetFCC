@@ -185,7 +185,7 @@ for inputfile in inputdatafiles:
     pred_tree={}
     #fields=["predicted", "truths", "event_index", "jets_px", "jets_py", "jets_pz", "jets_e", "jets_m",]
     ##fields=["event_index", "jets_px", "jets_py", "jets_pz", "jets_e", "jets_m", "predicted", "truth",]
-    # This is hardcoded, but I could technically just read it off of the TrainData datastructure...
+    # This is hardcoded, but I could technically just read it off of the TrainData datastructure... Think about what vars we need...
     fields=["event_index", "jets_px", "jets_py", "predicted", "truths",]
     
 
