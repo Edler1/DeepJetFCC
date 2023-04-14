@@ -1,5 +1,5 @@
 // Remember that to compile w/ g++ you need -> g++ postprocessor_2d.cpp -o postprocessor_2d.exe `root-config --cflags --glibs`
-
+// Note: This should be compiled after sourcing FCCAnalyses' setup.sh so it can be run directly after without having to reset the env.
 
 
 // This code is a barbaric way of reshaping <vectors>, I expect it to be (much) slower than coffea, but let's have a look -> it's actually much faster, go figure!
@@ -73,6 +73,18 @@ int main(int argc, char** argv){
    std::vector<int> *isC_Z = new std::vector<int>;
    std::vector<int> *isB_Z = new std::vector<int>;
    std::vector<int> *isUndefined_Z = new std::vector<int>;
+   std::vector<int> *isU_ghost_angle03status70 = new std::vector<int>;
+   std::vector<int> *isD_ghost_angle03status70 = new std::vector<int>;
+   std::vector<int> *isS_ghost_angle03status70 = new std::vector<int>;
+   std::vector<int> *isC_ghost_angle03status70 = new std::vector<int>;
+   std::vector<int> *isB_ghost_angle03status70 = new std::vector<int>;
+   std::vector<int> *isUndefined_ghost_angle03status70 = new std::vector<int>;
+   std::vector<int> *isU_ghost_angle03status20 = new std::vector<int>;
+   std::vector<int> *isD_ghost_angle03status20 = new std::vector<int>;
+   std::vector<int> *isS_ghost_angle03status20 = new std::vector<int>;
+   std::vector<int> *isC_ghost_angle03status20 = new std::vector<int>;
+   std::vector<int> *isB_ghost_angle03status20 = new std::vector<int>;
+   std::vector<int> *isUndefined_ghost_angle03status20 = new std::vector<int>;
    //std::vector<int> *Z_flavour = new std::vector<int>;
    
    //Jet-level variables
@@ -175,6 +187,18 @@ int main(int argc, char** argv){
    t1->SetBranchAddress("isC_Z",&isC_Z);
    t1->SetBranchAddress("isB_Z",&isB_Z);
    t1->SetBranchAddress("isUndefined_Z",&isUndefined_Z);
+   t1->SetBranchAddress("isU_ghost_angle03status70",&isU_ghost_angle03status70);
+   t1->SetBranchAddress("isD_ghost_angle03status70",&isD_ghost_angle03status70);
+   t1->SetBranchAddress("isS_ghost_angle03status70",&isS_ghost_angle03status70);
+   t1->SetBranchAddress("isC_ghost_angle03status70",&isC_ghost_angle03status70);
+   t1->SetBranchAddress("isB_ghost_angle03status70",&isB_ghost_angle03status70);
+   t1->SetBranchAddress("isUndefined_ghost_angle03status70",&isUndefined_ghost_angle03status70);
+   t1->SetBranchAddress("isU_ghost_angle03status20",&isU_ghost_angle03status20);
+   t1->SetBranchAddress("isD_ghost_angle03status20",&isD_ghost_angle03status20);
+   t1->SetBranchAddress("isS_ghost_angle03status20",&isS_ghost_angle03status20);
+   t1->SetBranchAddress("isC_ghost_angle03status20",&isC_ghost_angle03status20);
+   t1->SetBranchAddress("isB_ghost_angle03status20",&isB_ghost_angle03status20);
+   t1->SetBranchAddress("isUndefined_ghost_angle03status20",&isUndefined_ghost_angle03status20);
    //t1->SetBranchAddress("Z_flavour",&Z_flavour);
 
    t1->SetBranchAddress("jets_p",&jets_p);
@@ -296,6 +320,18 @@ int main(int argc, char** argv){
    Int_t isC_Z_;
    Int_t isB_Z_;
    Int_t isUndefined_Z_;
+   Int_t isU_ghost_angle03status70_;
+   Int_t isD_ghost_angle03status70_;
+   Int_t isS_ghost_angle03status70_;
+   Int_t isC_ghost_angle03status70_;
+   Int_t isB_ghost_angle03status70_;
+   Int_t isUndefined_ghost_angle03status70_;
+   Int_t isU_ghost_angle03status20_;
+   Int_t isD_ghost_angle03status20_;
+   Int_t isS_ghost_angle03status20_;
+   Int_t isC_ghost_angle03status20_;
+   Int_t isB_ghost_angle03status20_;
+   Int_t isUndefined_ghost_angle03status20_;
    //Int_t Z_flavour_;
 
    Float_t jets_p_;
@@ -400,6 +436,18 @@ int main(int argc, char** argv){
    newtree->Branch("isC_Z", &isC_Z_);
    newtree->Branch("isB_Z", &isB_Z_);
    newtree->Branch("isUndefined_Z", &isUndefined_Z_);
+   newtree->Branch("isU_ghost_angle03status70", &isU_ghost_angle03status70_);
+   newtree->Branch("isD_ghost_angle03status70", &isD_ghost_angle03status70_);
+   newtree->Branch("isS_ghost_angle03status70", &isS_ghost_angle03status70_);
+   newtree->Branch("isC_ghost_angle03status70", &isC_ghost_angle03status70_);
+   newtree->Branch("isB_ghost_angle03status70", &isB_ghost_angle03status70_);
+   newtree->Branch("isUndefined_ghost_angle03status70", &isUndefined_ghost_angle03status70_);
+   newtree->Branch("isU_ghost_angle03status20", &isU_ghost_angle03status20_);
+   newtree->Branch("isD_ghost_angle03status20", &isD_ghost_angle03status20_);
+   newtree->Branch("isS_ghost_angle03status20", &isS_ghost_angle03status20_);
+   newtree->Branch("isC_ghost_angle03status20", &isC_ghost_angle03status20_);
+   newtree->Branch("isB_ghost_angle03status20", &isB_ghost_angle03status20_);
+   newtree->Branch("isUndefined_ghost_angle03status20", &isUndefined_ghost_angle03status20_);
    //newtree->Branch("Z_flavour", &Z_flavour_);
 
    newtree->Branch("jets_p", &jets_p_);
@@ -436,15 +484,15 @@ int main(int argc, char** argv){
    newtree->Branch("RPj_charged_isElectron", &RPj_charged_isElectron_, "RPj_charged_isElectron[nCRP]/F");
    
    newtree->Branch("RPj_charged_is_S", &RPj_charged_is_S_, "RPj_charged_is_S[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon", &RPj_charged_is_S_, "RPj_charged_is_Kaon[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon_smearedUniform080", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform080[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon_smearedUniform090", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform090[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon_smearedUniform095", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform095[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon_smearedUniform060", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform060[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon_smearedUniform040", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform040[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon_smearedUniform020", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform020[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon_smearedUniform000", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform000[nCRP]/F");
-   newtree->Branch("RPj_charged_is_Kaon_smearedUniform100", &RPj_charged_is_S_, "RPj_charged_is_Kaon_smearedUniform100[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon", &RPj_charged_is_Kaon_, "RPj_charged_is_Kaon[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform080", &RPj_charged_is_Kaon_smearedUniform080_, "RPj_charged_is_Kaon_smearedUniform080[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform090", &RPj_charged_is_Kaon_smearedUniform090_, "RPj_charged_is_Kaon_smearedUniform090[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform095", &RPj_charged_is_Kaon_smearedUniform095_, "RPj_charged_is_Kaon_smearedUniform095[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform060", &RPj_charged_is_Kaon_smearedUniform060_, "RPj_charged_is_Kaon_smearedUniform060[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform040", &RPj_charged_is_Kaon_smearedUniform040_, "RPj_charged_is_Kaon_smearedUniform040[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform020", &RPj_charged_is_Kaon_smearedUniform020_, "RPj_charged_is_Kaon_smearedUniform020[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform000", &RPj_charged_is_Kaon_smearedUniform000_, "RPj_charged_is_Kaon_smearedUniform000[nCRP]/F");
+   newtree->Branch("RPj_charged_is_Kaon_smearedUniform100", &RPj_charged_is_Kaon_smearedUniform100_, "RPj_charged_is_Kaon_smearedUniform100[nCRP]/F");
 
    newtree->Branch("RPj_neutral_p", &RPj_neutral_p_, "RPj_neutral_p[nNRP]/F");
    newtree->Branch("RPj_neutral_pRel", &RPj_neutral_pRel_, "RPj_neutral_pRel[nNRP]/F");
@@ -480,13 +528,14 @@ int main(int argc, char** argv){
    newtree->Branch("v0_d3d", &v0_d3d_, "v0_d3d[nV0]/F");
    
    for(int i=0; i<nentries; ++i){
+     t1->GetEntry(i);
+     if((*jets_p).size()!=2) std::cout<<"ANOMALY : nJets="<<((*jets_p).size())<<std::endl;
      for(int j=0; j<(*jets_p).size(); ++j){
      //for(int j=0; j<2; ++j){
    
-       t1->GetEntry(i);
        
        event_index = i;
-       jet_index = 0;
+       jet_index = j;
        //std::cout<<" "<<" with size "<<(*isU).size()<<std::endl;
         
        isU_ = (*isU)[j];
@@ -507,6 +556,18 @@ int main(int argc, char** argv){
        isC_Z_ = (*isC_Z)[j];
        isB_Z_ = (*isB_Z)[j];
        isUndefined_Z_ = (*isUndefined_Z)[j];
+       isU_ghost_angle03status70_ = (*isU_ghost_angle03status70)[j];
+       isD_ghost_angle03status70_ = (*isD_ghost_angle03status70)[j];
+       isS_ghost_angle03status70_ = (*isS_ghost_angle03status70)[j];
+       isC_ghost_angle03status70_ = (*isC_ghost_angle03status70)[j];
+       isB_ghost_angle03status70_ = (*isB_ghost_angle03status70)[j];
+       isUndefined_ghost_angle03status70_ = (*isUndefined_ghost_angle03status70)[j];
+       isU_ghost_angle03status20_ = (*isU_ghost_angle03status20)[j];
+       isD_ghost_angle03status20_ = (*isD_ghost_angle03status20)[j];
+       isS_ghost_angle03status20_ = (*isS_ghost_angle03status20)[j];
+       isC_ghost_angle03status20_ = (*isC_ghost_angle03status20)[j];
+       isB_ghost_angle03status20_ = (*isB_ghost_angle03status20)[j];
+       isUndefined_ghost_angle03status20_ = (*isUndefined_ghost_angle03status20)[j];
        //Z_flavour_ = (*Z_flavour)[j];
 
        jets_p_ = (*jets_p)[j];
@@ -615,6 +676,18 @@ int main(int argc, char** argv){
    delete isC_Z;
    delete isB_Z;
    delete isUndefined_Z;
+   delete isU_ghost_angle03status70;
+   delete isD_ghost_angle03status70;
+   delete isS_ghost_angle03status70;
+   delete isC_ghost_angle03status70;
+   delete isB_ghost_angle03status70;
+   delete isUndefined_ghost_angle03status70;
+   delete isU_ghost_angle03status20;
+   delete isD_ghost_angle03status20;
+   delete isS_ghost_angle03status20;
+   delete isC_ghost_angle03status20;
+   delete isB_ghost_angle03status20;
+   delete isUndefined_ghost_angle03status20;
    //delete Z_flavour;
 
    delete jets_p;
