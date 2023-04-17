@@ -217,7 +217,8 @@ for inputfile in inputdatafiles:
 
     fields = grep_output.split('\'')[1::2]
     print("spectator_branches = {}".format(fields))
-    fields = ["predicted", "truths"] + fields
+    #fields = ["predicted", "truths"] + fields
+    fields += ["predicted", "truths"]
 
 
     for spec_index, field in enumerate(fields):
