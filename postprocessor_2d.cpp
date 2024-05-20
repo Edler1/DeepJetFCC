@@ -102,20 +102,38 @@ int main(int argc, char** argv){
    std::vector<float> *jets_pt = new std::vector<float>;
    std::vector<float> *jets_eta = new std::vector<float>;
    
+   std::vector<float> *jets_angularity_00 = new std::vector<float>;
+   std::vector<float> *jets_angularity_105 = new std::vector<float>;
+   std::vector<float> *jets_angularity_11 = new std::vector<float>;
+   std::vector<float> *jets_angularity_12 = new std::vector<float>;
+   std::vector<float> *jets_angularity_20 = new std::vector<float>;
+   
    //Charged-constituent variables
    std::vector<std::vector<float>> *RPj_charged_p = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_theta = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_phi = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_mass = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_charge = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_Z0 = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_D0 = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_Z0_sig = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_D0_sig = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_Curv = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_pRel = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_eRel = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_dTheta = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_dPhi = new std::vector<std::vector<float>>;
-   std::vector<std::vector<float>> *RPj_charged_pRel = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_dR = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_p_log = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_pRel_log = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_e_log = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_eRel_log = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_dAngle = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_isMuon = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_charged_isElectron = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_isPion = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_isProton = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_charged_PID = new std::vector<std::vector<float>>;
    
    //Charged-constituent PID variables
    std::vector<std::vector<float>> *RPj_charged_is_S = new std::vector<std::vector<float>>;
@@ -131,8 +149,27 @@ int main(int argc, char** argv){
    
    //Neutral-constituent variables
    std::vector<std::vector<float>> *RPj_neutral_p = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_theta = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_phi = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_mass = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_neutral_pRel = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_eRel = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_dTheta = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_dPhi = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_dR = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_p_log = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_pRel_log = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_e_log = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_eRel_log = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_dAngle = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *RPj_neutral_isPhoton = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_isKlong = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_isNeutron = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *RPj_neutral_isNPion = new std::vector<std::vector<float>>;
+
+
+
+
 
    //SV variables
    std::vector<std::vector<float>> *sv_mass = new std::vector<std::vector<float>>;
@@ -159,8 +196,8 @@ int main(int argc, char** argv){
    std::vector<std::vector<int>> *v0_ndf = new std::vector<std::vector<int>>;
    std::vector<std::vector<float>> *v0_theta = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *v0_phi = new std::vector<std::vector<float>>;
-   ///////////////std::vector<std::vector<float>> *v0_thetarel = new std::vector<std::vector<float>>;
-   ///////////////std::vector<std::vector<float>> *v0_phirel = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *v0_thetarel = new std::vector<std::vector<float>>;
+   std::vector<std::vector<float>> *v0_phirel = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *v0_costhetasvpv = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *v0_dxy = new std::vector<std::vector<float>>;
    std::vector<std::vector<float>> *v0_d3d = new std::vector<std::vector<float>>;
@@ -215,19 +252,41 @@ int main(int argc, char** argv){
    t1->SetBranchAddress("jets_pt",&jets_pt);
    t1->SetBranchAddress("jets_eta",&jets_eta);
 
+
+   t1->SetBranchAddress("jets_angularity_00",&jets_angularity_00);
+   t1->SetBranchAddress("jets_angularity_105",&jets_angularity_105);
+   t1->SetBranchAddress("jets_angularity_11",&jets_angularity_11);
+   t1->SetBranchAddress("jets_angularity_12",&jets_angularity_12);
+   t1->SetBranchAddress("jets_angularity_20",&jets_angularity_20);
+
+
    t1->SetBranchAddress("RPj_charged_p",&RPj_charged_p);
    t1->SetBranchAddress("RPj_charged_theta",&RPj_charged_theta);
    t1->SetBranchAddress("RPj_charged_phi",&RPj_charged_phi);
    t1->SetBranchAddress("RPj_charged_mass",&RPj_charged_mass);
+   t1->SetBranchAddress("RPj_charged_charge",&RPj_charged_charge);
    t1->SetBranchAddress("RPj_charged_Z0",&RPj_charged_Z0);
    t1->SetBranchAddress("RPj_charged_D0",&RPj_charged_D0);
    t1->SetBranchAddress("RPj_charged_Z0_sig",&RPj_charged_Z0_sig);
    t1->SetBranchAddress("RPj_charged_D0_sig",&RPj_charged_D0_sig);
+   t1->SetBranchAddress("RPj_charged_Curv",&RPj_charged_Curv);
+   t1->SetBranchAddress("RPj_charged_pRel",&RPj_charged_pRel);
+   t1->SetBranchAddress("RPj_charged_eRel",&RPj_charged_eRel);
    t1->SetBranchAddress("RPj_charged_dTheta",&RPj_charged_dTheta);
    t1->SetBranchAddress("RPj_charged_dPhi",&RPj_charged_dPhi);
-   t1->SetBranchAddress("RPj_charged_pRel",&RPj_charged_pRel);
+   t1->SetBranchAddress("RPj_charged_dR",&RPj_charged_dR);
+   t1->SetBranchAddress("RPj_charged_p_log",&RPj_charged_p_log);
+   t1->SetBranchAddress("RPj_charged_pRel_log",&RPj_charged_pRel_log);
+   t1->SetBranchAddress("RPj_charged_e_log",&RPj_charged_e_log);
+   t1->SetBranchAddress("RPj_charged_eRel_log",&RPj_charged_eRel_log);
+   t1->SetBranchAddress("RPj_charged_dAngle",&RPj_charged_dAngle);
    t1->SetBranchAddress("RPj_charged_isMuon",&RPj_charged_isMuon);
    t1->SetBranchAddress("RPj_charged_isElectron",&RPj_charged_isElectron);
+   t1->SetBranchAddress("RPj_charged_isPion",&RPj_charged_isPion);
+   t1->SetBranchAddress("RPj_charged_isProton",&RPj_charged_isProton);
+   t1->SetBranchAddress("RPj_charged_PID",&RPj_charged_PID);
+
+
 
    t1->SetBranchAddress("RPj_charged_is_S",&RPj_charged_is_S);
    t1->SetBranchAddress("RPj_charged_is_Kaon",&RPj_charged_is_Kaon);
@@ -239,11 +298,25 @@ int main(int argc, char** argv){
    t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform020",&RPj_charged_is_Kaon_smearedUniform020);
    t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform000",&RPj_charged_is_Kaon_smearedUniform000);
    t1->SetBranchAddress("RPj_charged_is_Kaon_smearedUniform100",&RPj_charged_is_Kaon_smearedUniform100);
-   
-   
+
    t1->SetBranchAddress("RPj_neutral_p",&RPj_neutral_p);
+   t1->SetBranchAddress("RPj_neutral_theta",&RPj_neutral_theta);
+   t1->SetBranchAddress("RPj_neutral_phi",&RPj_neutral_phi);
+   t1->SetBranchAddress("RPj_neutral_mass",&RPj_neutral_mass);
    t1->SetBranchAddress("RPj_neutral_pRel",&RPj_neutral_pRel);
+   t1->SetBranchAddress("RPj_neutral_eRel",&RPj_neutral_eRel);
+   t1->SetBranchAddress("RPj_neutral_dTheta",&RPj_neutral_dTheta);
+   t1->SetBranchAddress("RPj_neutral_dPhi",&RPj_neutral_dPhi);
+   t1->SetBranchAddress("RPj_neutral_dR",&RPj_neutral_dR);
+   t1->SetBranchAddress("RPj_neutral_p_log",&RPj_neutral_p_log);
+   t1->SetBranchAddress("RPj_neutral_pRel_log",&RPj_neutral_pRel_log);
+   t1->SetBranchAddress("RPj_neutral_e_log",&RPj_neutral_e_log);
+   t1->SetBranchAddress("RPj_neutral_eRel_log",&RPj_neutral_eRel_log);
+   t1->SetBranchAddress("RPj_neutral_dAngle",&RPj_neutral_dAngle);
    t1->SetBranchAddress("RPj_neutral_isPhoton",&RPj_neutral_isPhoton);
+   t1->SetBranchAddress("RPj_neutral_isKlong",&RPj_neutral_isKlong);
+   t1->SetBranchAddress("RPj_neutral_isNeutron",&RPj_neutral_isNeutron);
+   t1->SetBranchAddress("RPj_neutral_isNPion",&RPj_neutral_isNPion);
 
    t1->SetBranchAddress("sv_mass",&sv_mass);
    t1->SetBranchAddress("sv_p",&sv_p);
@@ -269,8 +342,8 @@ int main(int argc, char** argv){
    t1->SetBranchAddress("v0_ndf",&v0_ndf);
    t1->SetBranchAddress("v0_theta",&v0_theta);
    t1->SetBranchAddress("v0_phi",&v0_phi);
-   /////////////t1->SetBranchAddress("v0_thetarel",&v0_thetarel);
-   /////////////t1->SetBranchAddress("v0_phirel",&v0_phirel);
+   t1->SetBranchAddress("v0_thetarel",&v0_thetarel);
+   t1->SetBranchAddress("v0_phirel",&v0_phirel);
    t1->SetBranchAddress("v0_costhetasvpv",&v0_costhetasvpv);
    t1->SetBranchAddress("v0_dxy",&v0_dxy);
    t1->SetBranchAddress("v0_d3d",&v0_d3d);
@@ -345,6 +418,13 @@ int main(int argc, char** argv){
    Float_t jets_nRP_charged_;
    Float_t jets_nRP_neutral_;
 
+   Float_t jets_angularity_00_;
+   Float_t jets_angularity_105_;
+   Float_t jets_angularity_11_;
+   Float_t jets_angularity_12_;
+   Float_t jets_angularity_20_;
+
+
    Int_t nCRP;
    Int_t nNRP;
    Int_t nSV;
@@ -356,20 +436,34 @@ int main(int argc, char** argv){
    //Note that the below version was me trying to convert vectors to arrays cleverly. I gave up pretty quickly because the code is already fast...
 
    //std::vector<float> RPj_charged_p_;
+
    Float_t RPj_charged_p_[100];
    Float_t RPj_charged_theta_[100];
    Float_t RPj_charged_phi_[100];
    Float_t RPj_charged_mass_[100];
+   Float_t RPj_charged_charge_[100];
    Float_t RPj_charged_Z0_[100];
    Float_t RPj_charged_D0_[100];
    Float_t RPj_charged_Z0_sig_[100];
    Float_t RPj_charged_D0_sig_[100];
+   Float_t RPj_charged_Curv_[100];
+   Float_t RPj_charged_pRel_[100];
+   Float_t RPj_charged_eRel_[100];
    Float_t RPj_charged_dTheta_[100];
    Float_t RPj_charged_dPhi_[100];
-   Float_t RPj_charged_pRel_[100];
+   Float_t RPj_charged_dR_[100];
+   Float_t RPj_charged_p_log_[100];
+   Float_t RPj_charged_pRel_log_[100];
+   Float_t RPj_charged_e_log_[100];
+   Float_t RPj_charged_eRel_log_[100];
+   Float_t RPj_charged_dAngle_[100];
    Float_t RPj_charged_isMuon_[100];
    Float_t RPj_charged_isElectron_[100];
-   
+   Float_t RPj_charged_isPion_[100];
+   Float_t RPj_charged_isProton_[100];
+   Float_t RPj_charged_PID_[100];
+
+
    Float_t RPj_charged_is_S_[100];
    Float_t RPj_charged_is_Kaon_[100];
    Float_t RPj_charged_is_Kaon_smearedUniform080_[100];
@@ -381,9 +475,28 @@ int main(int argc, char** argv){
    Float_t RPj_charged_is_Kaon_smearedUniform000_[100];
    Float_t RPj_charged_is_Kaon_smearedUniform100_[100];
 
+
    Float_t RPj_neutral_p_[100];
+   Float_t RPj_neutral_theta_[100];
+   Float_t RPj_neutral_phi_[100];
+   Float_t RPj_neutral_mass_[100];
    Float_t RPj_neutral_pRel_[100];
+   Float_t RPj_neutral_eRel_[100];
+   Float_t RPj_neutral_dTheta_[100];
+   Float_t RPj_neutral_dPhi_[100];
+   Float_t RPj_neutral_dR_[100];
+   Float_t RPj_neutral_p_log_[100];
+   Float_t RPj_neutral_pRel_log_[100];
+   Float_t RPj_neutral_e_log_[100];
+   Float_t RPj_neutral_eRel_log_[100];
+   Float_t RPj_neutral_dAngle_[100];
    Float_t RPj_neutral_isPhoton_[100];
+   Float_t RPj_neutral_isKlong_[100];
+   Float_t RPj_neutral_isNeutron_[100];
+   Float_t RPj_neutral_isNPion_[100];
+
+
+
 
    Float_t sv_mass_[100];
    Float_t sv_p_[100];
@@ -460,6 +573,15 @@ int main(int argc, char** argv){
    newtree->Branch("jets_e", &jets_e_);
    newtree->Branch("jets_nRP_charged", &jets_nRP_charged_);
    newtree->Branch("jets_nRP_neutral", &jets_nRP_neutral_);
+
+   newtree->Branch("jets_angularity_00", &jets_angularity_00_);
+   newtree->Branch("jets_angularity_105", &jets_angularity_105_);
+   newtree->Branch("jets_angularity_11", &jets_angularity_11_);
+   newtree->Branch("jets_angularity_12", &jets_angularity_12_);
+   newtree->Branch("jets_angularity_20", &jets_angularity_20_);
+
+   
+   
    
    newtree->Branch("nCRP", &nCRP, "nCRP/I");
    newtree->Branch("nNRP", &nNRP, "nNRP/I");
@@ -469,19 +591,34 @@ int main(int argc, char** argv){
    newtree->Branch("jets_pt", &jets_pt_);
    newtree->Branch("jets_eta", &jets_eta_);
 
+   
+   
    newtree->Branch("RPj_charged_p", &RPj_charged_p_, "RPj_charged_p[nCRP]/F");
    newtree->Branch("RPj_charged_theta", &RPj_charged_theta_, "RPj_charged_theta[nCRP]/F");
    newtree->Branch("RPj_charged_phi", &RPj_charged_phi_, "RPj_charged_phi[nCRP]/F");
    newtree->Branch("RPj_charged_mass", &RPj_charged_mass_, "RPj_charged_mass[nCRP]/F");
+   newtree->Branch("RPj_charged_charge", &RPj_charged_charge_, "RPj_charged_charge[nCRP]/F");
    newtree->Branch("RPj_charged_Z0", &RPj_charged_Z0_, "RPj_charged_Z0[nCRP]/F");
    newtree->Branch("RPj_charged_D0", &RPj_charged_D0_, "RPj_charged_D0[nCRP]/F");
    newtree->Branch("RPj_charged_Z0_sig", &RPj_charged_Z0_sig_, "RPj_charged_Z0_sig[nCRP]/F");
    newtree->Branch("RPj_charged_D0_sig", &RPj_charged_D0_sig_, "RPj_charged_D0_sig[nCRP]/F");
+   newtree->Branch("RPj_charged_Curv", &RPj_charged_Curv_, "RPj_charged_Curv[nCRP]/F");
+   newtree->Branch("RPj_charged_pRel", &RPj_charged_pRel_, "RPj_charged_pRel[nCRP]/F");
+   newtree->Branch("RPj_charged_eRel", &RPj_charged_eRel_, "RPj_charged_eRel[nCRP]/F");
    newtree->Branch("RPj_charged_dTheta", &RPj_charged_dTheta_, "RPj_charged_dTheta[nCRP]/F");
    newtree->Branch("RPj_charged_dPhi", &RPj_charged_dPhi_, "RPj_charged_dPhi[nCRP]/F");
-   newtree->Branch("RPj_charged_pRel", &RPj_charged_pRel_, "RPj_charged_pRel[nCRP]/F");
+   newtree->Branch("RPj_charged_dR", &RPj_charged_dR_, "RPj_charged_dR[nCRP]/F");
+   newtree->Branch("RPj_charged_p_log", &RPj_charged_p_log_, "RPj_charged_p_log[nCRP]/F");
+   newtree->Branch("RPj_charged_pRel_log", &RPj_charged_pRel_log_, "RPj_charged_pRel_log[nCRP]/F");
+   newtree->Branch("RPj_charged_e_log", &RPj_charged_e_log_, "RPj_charged_e_log[nCRP]/F");
+   newtree->Branch("RPj_charged_eRel_log", &RPj_charged_eRel_log_, "RPj_charged_eRel_log[nCRP]/F");
+   newtree->Branch("RPj_charged_dAngle", &RPj_charged_dAngle_, "RPj_charged_dAngle[nCRP]/F");
    newtree->Branch("RPj_charged_isMuon", &RPj_charged_isMuon_, "RPj_charged_isMuon[nCRP]/F");
    newtree->Branch("RPj_charged_isElectron", &RPj_charged_isElectron_, "RPj_charged_isElectron[nCRP]/F");
+   newtree->Branch("RPj_charged_isPion", &RPj_charged_isPion_, "RPj_charged_isPion[nCRP]/F");
+   newtree->Branch("RPj_charged_isProton", &RPj_charged_isProton_, "RPj_charged_isProton[nCRP]/F");
+   newtree->Branch("RPj_charged_PID", &RPj_charged_PID_, "RPj_charged_PID[nCRP]/F");
+   
    
    newtree->Branch("RPj_charged_is_S", &RPj_charged_is_S_, "RPj_charged_is_S[nCRP]/F");
    newtree->Branch("RPj_charged_is_Kaon", &RPj_charged_is_Kaon_, "RPj_charged_is_Kaon[nCRP]/F");
@@ -494,9 +631,28 @@ int main(int argc, char** argv){
    newtree->Branch("RPj_charged_is_Kaon_smearedUniform000", &RPj_charged_is_Kaon_smearedUniform000_, "RPj_charged_is_Kaon_smearedUniform000[nCRP]/F");
    newtree->Branch("RPj_charged_is_Kaon_smearedUniform100", &RPj_charged_is_Kaon_smearedUniform100_, "RPj_charged_is_Kaon_smearedUniform100[nCRP]/F");
 
+   
+   
+
    newtree->Branch("RPj_neutral_p", &RPj_neutral_p_, "RPj_neutral_p[nNRP]/F");
+   newtree->Branch("RPj_neutral_theta", &RPj_neutral_theta_, "RPj_neutral_theta[nNRP]/F");
+   newtree->Branch("RPj_neutral_phi", &RPj_neutral_phi_, "RPj_neutral_phi[nNRP]/F");
+   newtree->Branch("RPj_neutral_mass", &RPj_neutral_mass_, "RPj_neutral_mass[nNRP]/F");
    newtree->Branch("RPj_neutral_pRel", &RPj_neutral_pRel_, "RPj_neutral_pRel[nNRP]/F");
+   newtree->Branch("RPj_neutral_eRel", &RPj_neutral_eRel_, "RPj_neutral_eRel[nNRP]/F");
+   newtree->Branch("RPj_neutral_dTheta", &RPj_neutral_dTheta_, "RPj_neutral_dTheta[nNRP]/F");
+   newtree->Branch("RPj_neutral_dPhi", &RPj_neutral_dPhi_, "RPj_neutral_dPhi[nNRP]/F");
+   newtree->Branch("RPj_neutral_dR", &RPj_neutral_dR_, "RPj_neutral_dR[nNRP]/F");
+   newtree->Branch("RPj_neutral_p_log", &RPj_neutral_p_log_, "RPj_neutral_p_log[nNRP]/F");
+   newtree->Branch("RPj_neutral_pRel_log", &RPj_neutral_pRel_log_, "RPj_neutral_pRel_log[nNRP]/F");
+   newtree->Branch("RPj_neutral_e_log", &RPj_neutral_e_log_, "RPj_neutral_e_log[nNRP]/F");
+   newtree->Branch("RPj_neutral_eRel_log", &RPj_neutral_eRel_log_, "RPj_neutral_eRel_log[nNRP]/F");
+   newtree->Branch("RPj_neutral_dAngle", &RPj_neutral_dAngle_, "RPj_neutral_dAngle[nNRP]/F");
    newtree->Branch("RPj_neutral_isPhoton", &RPj_neutral_isPhoton_, "RPj_neutral_isPhoton[nNRP]/F");
+   newtree->Branch("RPj_neutral_isKlong", &RPj_neutral_isKlong_, "RPj_neutral_isKlong[nNRP]/F");
+   newtree->Branch("RPj_neutral_isNeutron", &RPj_neutral_isNeutron_, "RPj_neutral_isNeutron[nNRP]/F");
+   newtree->Branch("RPj_neutral_isNPion", &RPj_neutral_isNPion_, "RPj_neutral_isNPion[nNRP]/F");
+
 
    newtree->Branch("sv_mass", &sv_mass_, "sv_mass[nSV]/F");
    newtree->Branch("sv_p", &sv_p_, "sv_p[nSV]/F");
@@ -521,12 +677,12 @@ int main(int argc, char** argv){
    newtree->Branch("v0_ndf", &v0_ndf_, "v0_ndf[nV0]/F");
    newtree->Branch("v0_theta", &v0_theta_, "v0_theta[nV0]/F");
    newtree->Branch("v0_phi", &v0_phi_, "v0_phi[nV0]/F");
-   //////////////////newtree->Branch("v0_thetarel", &v0_thetarel_, "v0_thetarel[nV0]/F");
-   //////////////////newtree->Branch("v0_phirel", &v0_phirel_, "v0_phirel[nV0]/F");
+   newtree->Branch("v0_thetarel", &v0_thetarel_, "v0_thetarel[nV0]/F");
+   newtree->Branch("v0_phirel", &v0_phirel_, "v0_phirel[nV0]/F");
    newtree->Branch("v0_costhetasvpv", &v0_costhetasvpv_, "v0_costhetasvpv[nV0]/F");
    newtree->Branch("v0_dxy", &v0_dxy_, "v0_dxy[nV0]/F");
    newtree->Branch("v0_d3d", &v0_d3d_, "v0_d3d[nV0]/F");
-   
+
    for(int i=0; i<nentries; ++i){
      t1->GetEntry(i);
      if((*jets_p).size()!=2) std::cout<<"ANOMALY : nJets="<<((*jets_p).size())<<std::endl;
@@ -579,31 +735,54 @@ int main(int argc, char** argv){
        jets_m_ = (*jets_m)[j];
        jets_e_ = (*jets_e)[j];
        jets_nRP_charged_ = (*jets_nRP_charged)[j];
-       
+       jets_nRP_neutral_ = (*jets_nRP_neutral)[j];
+  
+       jets_angularity_00_ = (*jets_angularity_00)[j];
+       jets_angularity_105_ = (*jets_angularity_105)[j];
+       jets_angularity_11_ = (*jets_angularity_11)[j];
+       jets_angularity_12_ = (*jets_angularity_12)[j];
+       jets_angularity_20_ = (*jets_angularity_20)[j];
+
+
+
        nCRP = (*jets_nRP_charged)[j];
        nNRP = (*jets_nRP_neutral)[j];
        nSV = (*sv_p)[j].size();
        nV0 = (*v0_p)[j].size();
        //std::cout<<"nSV, nV0 = "<<nSV<<", "<<nV0<<std::endl;
       
-       jets_nRP_neutral_ = (*jets_nRP_neutral)[j];
        jets_pt_ = (*jets_pt)[j];
        jets_eta_ = (*jets_eta)[j];
+     
 
-       std::copy((*RPj_charged_p)[j].begin(), (*RPj_charged_p)[j].end(), RPj_charged_p_);//&((*RPj_charged_p)[j])[j]
+       std::copy((*RPj_charged_p)[j].begin(), (*RPj_charged_p)[j].end(), RPj_charged_p_);
        std::copy((*RPj_charged_theta)[j].begin(), (*RPj_charged_theta)[j].end(), RPj_charged_theta_);
        std::copy((*RPj_charged_phi)[j].begin(), (*RPj_charged_phi)[j].end(), RPj_charged_phi_);
        std::copy((*RPj_charged_mass)[j].begin(), (*RPj_charged_mass)[j].end(), RPj_charged_mass_);
+       std::copy((*RPj_charged_charge)[j].begin(), (*RPj_charged_charge)[j].end(), RPj_charged_charge_);
        std::copy((*RPj_charged_Z0)[j].begin(), (*RPj_charged_Z0)[j].end(), RPj_charged_Z0_);
        std::copy((*RPj_charged_D0)[j].begin(), (*RPj_charged_D0)[j].end(), RPj_charged_D0_);
        std::copy((*RPj_charged_Z0_sig)[j].begin(), (*RPj_charged_Z0_sig)[j].end(), RPj_charged_Z0_sig_);
        std::copy((*RPj_charged_D0_sig)[j].begin(), (*RPj_charged_D0_sig)[j].end(), RPj_charged_D0_sig_);
+       std::copy((*RPj_charged_Curv)[j].begin(), (*RPj_charged_Curv)[j].end(), RPj_charged_Curv_);
+       std::copy((*RPj_charged_pRel)[j].begin(), (*RPj_charged_pRel)[j].end(), RPj_charged_pRel_);
+       std::copy((*RPj_charged_eRel)[j].begin(), (*RPj_charged_eRel)[j].end(), RPj_charged_eRel_);
        std::copy((*RPj_charged_dTheta)[j].begin(), (*RPj_charged_dTheta)[j].end(), RPj_charged_dTheta_);
        std::copy((*RPj_charged_dPhi)[j].begin(), (*RPj_charged_dPhi)[j].end(), RPj_charged_dPhi_);
-       std::copy((*RPj_charged_pRel)[j].begin(), (*RPj_charged_pRel)[j].end(), RPj_charged_pRel_);
+       std::copy((*RPj_charged_dR)[j].begin(), (*RPj_charged_dR)[j].end(), RPj_charged_dR_);
+       std::copy((*RPj_charged_p_log)[j].begin(), (*RPj_charged_p_log)[j].end(), RPj_charged_p_log_);
+       std::copy((*RPj_charged_pRel_log)[j].begin(), (*RPj_charged_pRel_log)[j].end(), RPj_charged_pRel_log_);
+       std::copy((*RPj_charged_e_log)[j].begin(), (*RPj_charged_e_log)[j].end(), RPj_charged_e_log_);
+       std::copy((*RPj_charged_eRel_log)[j].begin(), (*RPj_charged_eRel_log)[j].end(), RPj_charged_eRel_log_);
+       std::copy((*RPj_charged_dAngle)[j].begin(), (*RPj_charged_dAngle)[j].end(), RPj_charged_dAngle_);
        std::copy((*RPj_charged_isMuon)[j].begin(), (*RPj_charged_isMuon)[j].end(), RPj_charged_isMuon_);
        std::copy((*RPj_charged_isElectron)[j].begin(), (*RPj_charged_isElectron)[j].end(), RPj_charged_isElectron_);
-      
+       std::copy((*RPj_charged_isPion)[j].begin(), (*RPj_charged_isPion)[j].end(), RPj_charged_isPion_);
+       std::copy((*RPj_charged_isProton)[j].begin(), (*RPj_charged_isProton)[j].end(), RPj_charged_isProton_);
+       std::copy((*RPj_charged_PID)[j].begin(), (*RPj_charged_PID)[j].end(), RPj_charged_PID_);       
+
+
+
        std::copy((*RPj_charged_is_S)[j].begin(), (*RPj_charged_is_S)[j].end(), RPj_charged_is_S_);
        std::copy((*RPj_charged_is_Kaon)[j].begin(), (*RPj_charged_is_Kaon)[j].end(), RPj_charged_is_Kaon_);
        std::copy((*RPj_charged_is_Kaon_smearedUniform080)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform080)[j].end(), RPj_charged_is_Kaon_smearedUniform080_);
@@ -615,9 +794,27 @@ int main(int argc, char** argv){
        std::copy((*RPj_charged_is_Kaon_smearedUniform000)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform000)[j].end(), RPj_charged_is_Kaon_smearedUniform000_);
        std::copy((*RPj_charged_is_Kaon_smearedUniform100)[j].begin(), (*RPj_charged_is_Kaon_smearedUniform100)[j].end(), RPj_charged_is_Kaon_smearedUniform100_);
 
-       std::copy((*RPj_neutral_p)[j].begin(), (*RPj_neutral_p)[j].end(), RPj_neutral_p_);//&((*RPj_neutral_p)[j])[j]
+
+       std::copy((*RPj_neutral_p)[j].begin(), (*RPj_neutral_p)[j].end(), RPj_neutral_p_);
+       std::copy((*RPj_neutral_theta)[j].begin(), (*RPj_neutral_theta)[j].end(), RPj_neutral_theta_);
+       std::copy((*RPj_neutral_phi)[j].begin(), (*RPj_neutral_phi)[j].end(), RPj_neutral_phi_);
+       std::copy((*RPj_neutral_mass)[j].begin(), (*RPj_neutral_mass)[j].end(), RPj_neutral_mass_);
        std::copy((*RPj_neutral_pRel)[j].begin(), (*RPj_neutral_pRel)[j].end(), RPj_neutral_pRel_);
+       std::copy((*RPj_neutral_eRel)[j].begin(), (*RPj_neutral_eRel)[j].end(), RPj_neutral_eRel_);
+       std::copy((*RPj_neutral_dTheta)[j].begin(), (*RPj_neutral_dTheta)[j].end(), RPj_neutral_dTheta_);
+       std::copy((*RPj_neutral_dPhi)[j].begin(), (*RPj_neutral_dPhi)[j].end(), RPj_neutral_dPhi_);
+       std::copy((*RPj_neutral_dR)[j].begin(), (*RPj_neutral_dR)[j].end(), RPj_neutral_dR_);
+       std::copy((*RPj_neutral_p_log)[j].begin(), (*RPj_neutral_p_log)[j].end(), RPj_neutral_p_log_);
+       std::copy((*RPj_neutral_pRel_log)[j].begin(), (*RPj_neutral_pRel_log)[j].end(), RPj_neutral_pRel_log_);
+       std::copy((*RPj_neutral_e_log)[j].begin(), (*RPj_neutral_e_log)[j].end(), RPj_neutral_e_log_);
+       std::copy((*RPj_neutral_eRel_log)[j].begin(), (*RPj_neutral_eRel_log)[j].end(), RPj_neutral_eRel_log_);
+       std::copy((*RPj_neutral_dAngle)[j].begin(), (*RPj_neutral_dAngle)[j].end(), RPj_neutral_dAngle_);
        std::copy((*RPj_neutral_isPhoton)[j].begin(), (*RPj_neutral_isPhoton)[j].end(), RPj_neutral_isPhoton_);
+       std::copy((*RPj_neutral_isKlong)[j].begin(), (*RPj_neutral_isKlong)[j].end(), RPj_neutral_isKlong_);
+       std::copy((*RPj_neutral_isNeutron)[j].begin(), (*RPj_neutral_isNeutron)[j].end(), RPj_neutral_isNeutron_);
+       std::copy((*RPj_neutral_isNPion)[j].begin(), (*RPj_neutral_isNPion)[j].end(), RPj_neutral_isNPion_);   
+
+      
 
        std::copy((*sv_mass)[j].begin(), (*sv_mass)[j].end(), sv_mass_);
        std::copy((*sv_p)[j].begin(), (*sv_p)[j].end(), sv_p_);
@@ -642,8 +839,8 @@ int main(int argc, char** argv){
        std::copy((*v0_ndf)[j].begin(), (*v0_ndf)[j].end(), v0_ndf_);
        std::copy((*v0_theta)[j].begin(), (*v0_theta)[j].end(), v0_theta_);
        std::copy((*v0_phi)[j].begin(), (*v0_phi)[j].end(), v0_phi_);
-       ///////////std::copy((*v0_thetarel)[j].begin(), (*v0_thetarel)[j].end(), v0_thetarel_);
-       ///////////std::copy((*v0_phirel)[j].begin(), (*v0_phirel)[j].end(), v0_phirel_);
+       std::copy((*v0_thetarel)[j].begin(), (*v0_thetarel)[j].end(), v0_thetarel_);
+       std::copy((*v0_phirel)[j].begin(), (*v0_phirel)[j].end(), v0_phirel_);
        std::copy((*v0_costhetasvpv)[j].begin(), (*v0_costhetasvpv)[j].end(), v0_costhetasvpv_);
        std::copy((*v0_dxy)[j].begin(), (*v0_dxy)[j].end(), v0_dxy_);
        std::copy((*v0_d3d)[j].begin(), (*v0_d3d)[j].end(), v0_d3d_);
@@ -701,6 +898,12 @@ int main(int argc, char** argv){
    delete jets_nRP_charged;
    delete jets_nRP_neutral;
 
+   delete jets_angularity_00;
+   delete jets_angularity_105;
+   delete jets_angularity_11;
+   delete jets_angularity_12;
+   delete jets_angularity_20;   
+
    delete jets_pt;
    delete jets_eta;
 
@@ -708,16 +911,28 @@ int main(int argc, char** argv){
    delete RPj_charged_theta;
    delete RPj_charged_phi;
    delete RPj_charged_mass;
+   delete RPj_charged_charge;
    delete RPj_charged_Z0;
    delete RPj_charged_D0;
    delete RPj_charged_Z0_sig;
    delete RPj_charged_D0_sig;
+   delete RPj_charged_Curv;
+   delete RPj_charged_pRel;
+   delete RPj_charged_eRel;
    delete RPj_charged_dTheta;
    delete RPj_charged_dPhi;
-   delete RPj_charged_pRel;
+   delete RPj_charged_dR;
+   delete RPj_charged_p_log;
+   delete RPj_charged_pRel_log;
+   delete RPj_charged_e_log;
+   delete RPj_charged_eRel_log;
+   delete RPj_charged_dAngle;
    delete RPj_charged_isMuon;
    delete RPj_charged_isElectron;
-   
+   delete RPj_charged_isPion;
+   delete RPj_charged_isProton;
+   delete RPj_charged_PID;        
+
    delete RPj_charged_is_S;
    delete RPj_charged_is_Kaon;
    delete RPj_charged_is_Kaon_smearedUniform080;
@@ -729,9 +944,26 @@ int main(int argc, char** argv){
    delete RPj_charged_is_Kaon_smearedUniform000;
    delete RPj_charged_is_Kaon_smearedUniform100;
 
+
    delete RPj_neutral_p;
+   delete RPj_neutral_theta;
+   delete RPj_neutral_phi;
+   delete RPj_neutral_mass;
    delete RPj_neutral_pRel;
+   delete RPj_neutral_eRel;
+   delete RPj_neutral_dTheta;
+   delete RPj_neutral_dPhi;
+   delete RPj_neutral_dR;
+   delete RPj_neutral_p_log;
+   delete RPj_neutral_pRel_log;
+   delete RPj_neutral_e_log;
+   delete RPj_neutral_eRel_log;
+   delete RPj_neutral_dAngle;
    delete RPj_neutral_isPhoton;
+   delete RPj_neutral_isKlong;
+   delete RPj_neutral_isNeutron;
+   delete RPj_neutral_isNPion;   
+
 
    delete sv_mass;
    delete sv_p;
@@ -756,8 +988,8 @@ int main(int argc, char** argv){
    delete v0_ndf;
    delete v0_theta;
    delete v0_phi;
-   ///////////delete v0_thetarel;
-   ///////////delete v0_phirel;
+   delete v0_thetarel;
+   delete v0_phirel;
    delete v0_costhetasvpv;
    delete v0_dxy;
    delete v0_d3d;

@@ -56,23 +56,29 @@ class InputProcess(nn.Module):
     def __init__(self, **kwargs):
         super(InputProcess, self).__init__(**kwargs)
         
-        self.cpf_bn0 = torch.nn.BatchNorm1d(8, eps = 0.001, momentum = 0.1)
-        self.cpf_conv1 = InputConv(8,64)
+        self.cpf_bn0 = torch.nn.BatchNorm1d(19, eps = 0.001, momentum = 0.1)
+        self.cpf_conv1 = InputConv(19,64)
+        ###self.cpf_bn0 = torch.nn.BatchNorm1d(8, eps = 0.001, momentum = 0.1)
+        ###self.cpf_conv1 = InputConv(8,64)
         self.cpf_conv2 = InputConv(64,128)
         self.cpf_conv3 = InputConv(128,128)
         
-        self.npf_bn0 = torch.nn.BatchNorm1d(3, eps = 0.001, momentum = 0.1)
-        self.npf_conv1 = InputConv(3,64)
+        self.npf_bn0 = torch.nn.BatchNorm1d(11, eps = 0.001, momentum = 0.1)
+        self.npf_conv1 = InputConv(11,64)
         self.npf_conv2 = InputConv(64,128)
         self.npf_conv3 = InputConv(128,128)
         
-        self.vtx_bn0 = torch.nn.BatchNorm1d(5, eps = 0.001, momentum = 0.1)
-        self.vtx_conv1 = InputConv(5,64)
+        self.vtx_bn0 = torch.nn.BatchNorm1d(11, eps = 0.001, momentum = 0.1)
+        self.vtx_conv1 = InputConv(11,64)
+        ###self.vtx_bn0 = torch.nn.BatchNorm1d(5, eps = 0.001, momentum = 0.1)
+        ###self.vtx_conv1 = InputConv(5,64)
         self.vtx_conv2 = InputConv(64,128)
         self.vtx_conv3 = InputConv(128,128)
 
-        self.v0_bn0 = torch.nn.BatchNorm1d(5, eps = 0.001, momentum = 0.1)
-        self.v0_conv1 = InputConv(5,64)
+        self.v0_bn0 = torch.nn.BatchNorm1d(11, eps = 0.001, momentum = 0.1)
+        self.v0_conv1 = InputConv(11,64)
+        ###self.v0_bn0 = torch.nn.BatchNorm1d(5, eps = 0.001, momentum = 0.1)
+        ###self.v0_conv1 = InputConv(5,64)
         self.v0_conv2 = InputConv(64,128)
         self.v0_conv3 = InputConv(128,128)
 
@@ -150,9 +156,12 @@ class DenseClassifier(nn.Module):
     def __init__(self, **kwargs):
         super(DenseClassifier, self).__init__(**kwargs)
              
-        self.LinLayer1 = LinLayer(135,135)
-        self.LinLayer2 = LinLayer(135,135)
-        self.LinLayer3 = LinLayer(135,135)
+        ###self.LinLayer1 = LinLayer(135,135)
+        ###self.LinLayer2 = LinLayer(135,135)
+        ###self.LinLayer3 = LinLayer(135,135)
+        self.LinLayer1 = LinLayer(140,140)
+        self.LinLayer2 = LinLayer(140,140)
+        self.LinLayer3 = LinLayer(140,140)
 
     def forward(self, x):
         
@@ -308,10 +317,12 @@ class DeepJetTransformerV0(nn.Module):
         self.InputProcess = InputProcess()
         self.DenseClassifier = DenseClassifier()
         ###########self.Linear = nn.Linear(143, num_classes)
-        self.Linear = nn.Linear(135, num_classes)
+        ###self.Linear = nn.Linear(135, num_classes)
+        self.Linear = nn.Linear(140, num_classes)
         self.pooling = AttentionPooling()
 
-        self.global_bn = torch.nn.BatchNorm1d(7, eps = 0.001, momentum = 0.1)
+        ###self.global_bn = torch.nn.BatchNorm1d(7, eps = 0.001, momentum = 0.1)
+        self.global_bn = torch.nn.BatchNorm1d(12, eps = 0.001, momentum = 0.1)
 
         self.EncoderLayer = HF_TransformerEncoderLayer(d_model=128, nhead=8, dropout = 0.1)
         self.Encoder = HF_TransformerEncoder(self.EncoderLayer, num_layers=3)
@@ -320,7 +331,7 @@ class DeepJetTransformerV0(nn.Module):
 
 #        cpf[:,:,2] = torch.abs(cpf[:,:,2])
  #       npf[:,:,2] = torch.abs(npf[:,:,2])
-        cpf = cpf[:,:,:16]
+        cpf = cpf[:,:,:30]
         pxl = 1
         
         mask = torch.cat((cpf[:,:,0] == 0.0, npf[:,:,0] == 0.0, vtx[:,:,0] == 0.0, v0[:,:,0] == 0.0),dim = 1)

@@ -35,10 +35,16 @@ from pytorch_deepjet import DeepJet
 from pytorch_deepjet_transformer import DeepJetTransformer
 from pytorch_deepjet_transformer_V0 import DeepJetTransformerV0
 from pytorch_deepjet_transformer_V0_Higgs import DeepJetTransformerV0 as DeepJetTransformerV0_Higgs
+##from pytorch_deepjet_transformer_V0_reducedKin import DeepJetTransformerV0 as DeepJetTransformerV0_reducedKin
+##from pytorch_deepjet_transformer_V0_fullKin import DeepJetTransformerV0 as DeepJetTransformerV0_fullKin
+##from pytorch_deepjet_transformer_V0_fullKin_noAng import DeepJetTransformerV0 as DeepJetTransformerV0_fullKin_noAng
+##from pytorch_deepjet_transformer_V0_fullKin_fullPID import DeepJetTransformerV0 as DeepJetTransformerV0_fullKin_fullPID
 from torch.optim import Adam, SGD
 from tqdm import tqdm
 import re
 import subprocess
+
+from pytorch_first_try import cross_entropy_one_hot
 
 import DeepJetCore
 
@@ -79,14 +85,16 @@ def test_loop(dataloader, model, nbatches, pbar):
                 global_vars = np.concatenate((global_vars, glob.cpu().detach().numpy()), axis=0)
                 y_vars = np.concatenate((y_vars, y.cpu().detach().numpy()), axis=0)
                 spectator_vars = np.concatenate((spectator_vars, spec.cpu().detach().numpy()), axis=0)
+            
+            loss = cross_entropy_one_hot(torch.Tensor(predictions), torch.Tensor(y_vars))
+
             desc = 'Predicting probs : '
             pbar.set_description(desc)
             pbar.update(1)
-    #if (not all_vars):       
-    #    return predictions, y_vars, global_vars, spectator_vars
-    #else:
-    #    return predictions, y_vars, global_vars, spectator_vars
-    return predictions, y_vars, global_vars, spectator_vars
+    if (not all_vars):       
+        return predictions, y_vars, global_vars, spectator_vars, loss
+    else:
+        return predictions, y_vars, global_vars, spectator_vars, loss
 
 ## prepare input lists for different file formats
 if args.inputSourceFileList[-6:] == ".djcdc":
@@ -117,6 +125,14 @@ elif args.model == 'DeepJetTransformerV0':
     model = DeepJetTransformerV0(num_classes = 5)
 elif args.model == 'DeepJetTransformerV0_Higgs':
     model = DeepJetTransformerV0_Higgs(num_classes = 6)
+##elif args.model == 'DeepJetTransformerV0_reducedKin':
+##    model = DeepJetTransformerV0_reducedKin(num_classes = 5)
+##elif args.model == 'DeepJetTransformerV0_fullKin':
+##    model = DeepJetTransformerV0_fullKin(num_classes = 5)
+##elif args.model == 'DeepJetTransformerV0_fullKin_noAng':
+##    model = DeepJetTransformerV0_fullKin_noAng(num_classes = 5)
+##elif args.model == 'DeepJetTransformerV0_fullKin_fullPID':
+##    model = DeepJetTransformerV0_fullKin_fullPID(num_classes = 5)
 else:
     raise Exception("Model name incorrect!")
 
@@ -188,8 +204,10 @@ for inputfile in inputdatafiles:
     predict_np = predicted[0] 
     truths_np = predicted[1]
     globs_np = predicted[2]
-    print("Saving npz file in {0}".format((args.inputModel).split("/")[-2]))
-    np.savez("{0}/raw_predictions_{1}.npz".format((args.inputModel).split("/")[-2], inputfile[6:-5]), predict_np, truths_np, globs_np)
+    loss_np=np.repeat(predicted[4], len(predicted[0])).numpy()
+
+    print("Saving npz file in {0}".format(args.outputDir).rstrip("/"))
+    np.savez("{0}/raw_predictions_{1}.npz".format((args.outputDir).rstrip("/"), inputfile.split(".")[0]), predict_np, truths_np, globs_np, loss_np)
      
     pred_tree={}
     #fields=["predicted", "truths", "event_index", "jets_px", "jets_py", "jets_pz", "jets_e", "jets_m",]
@@ -209,7 +227,7 @@ for inputfile in inputdatafiles:
     pattern = "self.spectator_branches = \[*"
     
     # Call the grep command and store the output
-    grep_output = subprocess.check_output(["grep", pattern, filename])
+    grep_output = subprocess.check_output(["grep", "-m", "1", pattern, filename])
     
     # Decode the output from bytes to string
     grep_output = grep_output.decode()
@@ -230,8 +248,16 @@ for inputfile in inputdatafiles:
             continue
         # for now this is spectators, beware!
         pred_tree[field]=predicted[3][:,spec_index]
- 
-    root_file = uproot.recreate("{0}/raw_predictions_{1}.root".format((args.inputModel).split("/")[-2], inputfile[6:-5]))
+
+
+    pred_tree["loss"]=np.repeat(predicted[4], len(predicted[0])).numpy()
+
+    #root_file = uproot.recreate("{0}/raw_predictions_{1}.root".format((args.inputModel).split("/")[-2], inputfile[6:-5]))
+    
+    print("Saving {0}/raw_predictions_{1}.root ...".format((args.outputDir).rstrip("/"), inputfile.split(".")[0]))
+    
+    root_file = uproot.recreate("{0}/raw_predictions_{1}.root".format((args.outputDir).rstrip("/"), inputfile.split(".")[0]))
+    #root_file = uproot.recreate("{0}/raw_predictions_{1}.root".format((args.inputModel).split("/")[-2], inputfile[6:-5]))
     root_file["tree"] = pred_tree
     root_file.close()  
     
